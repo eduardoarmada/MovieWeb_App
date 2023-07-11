@@ -1,5 +1,6 @@
 import json
-from DataManagerInterface import DataManagerInterface
+import os
+from .DataManagerInterface import DataManagerInterface
 
 
 class JSONDataManager(DataManagerInterface):
@@ -11,7 +12,7 @@ class JSONDataManager(DataManagerInterface):
         with open(self.filename, 'r') as file:
             data = json.loads(file.read())
 
-        return [user['name'] for user in data.values()]
+        return [user.get('name', 101) for user in data.values()]
 
     def get_user_movies(self, user_id):
         # Return a list of all movies for a given user
