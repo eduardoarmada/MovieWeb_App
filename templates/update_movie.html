@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Movie!</title>
+</head>
+<body>
+
+    <h1>Update Movie</h1>
+    <form action="/users/{{user_id}}/update_movie/{{movie_id}}" method="POST">
+        <input type="text" name="name" placeholder="new movie name">
+        <input type="text" name="year" placeholder="new movie year">
+        <input type="text" name="rating" placeholder="new movie rating">
+        <input type="text" name="director" placeholder="new movie director">
+        <input type="submit" value="Send">
+    </form>
+
+</body>
+</html>

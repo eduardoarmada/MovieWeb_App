@@ -7,6 +7,10 @@ class JSONDataManager(DataManagerInterface):
     def __init__(self, filename):
         self.filename = filename
 
+    def get_all_data(self):
+        with open(self.filename, 'r') as file:
+            return json.loads(file.read())
+
     def get_all_users(self):
         # Return a list of all users
         with open(self.filename, 'r') as file:
@@ -51,7 +55,7 @@ class JSONDataManager(DataManagerInterface):
         with open(self.filename, 'r') as file:
             data = json.loads(file.read())
 
-        new_movies_id = max(int(movie['id']) for movie in self.get_user_movies(user_id)) + 1
+        new_movies_id = max([int(movie['id']) for movie in self.get_user_movies(user_id)]) + 1
         new_movie = {'id': new_movies_id, 'name': movie_data[0], 'director': movie_data[-1],
                      'year': movie_data[1], 'rating': movie_data[2], 'poster': movie_data[3]}
 
