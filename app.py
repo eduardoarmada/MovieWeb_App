@@ -26,17 +26,20 @@ def request_info_movie_api(title):
 
 @app.route("/")
 def home():
+    """Endpoint to the index page of the application"""
     return render_template('index.html')
 
 
 @app.route('/users')
 def list_users():
+    """Endpoint to the display of all the users available in the database"""
     data = data_manager.get_all_data()
     return render_template("users_list.html", users=data)
 
 
 @app.route("/users/<user_id>")
 def users_movies(user_id):
+    """Endpoint to the display of all the movies available of the user selected"""
     try:
         list_of_movies_data = data_manager.get_user_movies(user_id)
 
@@ -48,6 +51,7 @@ def users_movies(user_id):
 
 @app.route("/add_user", methods=['GET', 'POST'])
 def add_user():
+    """Endpoint to add a user in the database"""
     if request.method == 'POST':
         if request.form.get('name') is None:
             return render_template("400.html", error_message="No name was introduced"), 400
@@ -62,6 +66,7 @@ def add_user():
 
 @app.route("/users/<user_id>/add_movie", methods=['GET', 'POST'])
 def add_movie(user_id):
+    """Endpoint to add a movie to the selected user in the database"""
     if user_id not in data_manager.get_all_data():
         return render_template("400.html", error_message="No user with that ID was found"), 400
 
@@ -79,6 +84,7 @@ def add_movie(user_id):
 
 @app.route("/users/<user_id>/update_movie/<int:movie_id>", methods=['GET', 'POST'])
 def update_movie(user_id, movie_id):
+    """Endpoint to update the selected movie data"""
     if user_id not in data_manager.get_all_data():
         return render_template("400.html", error_message="No user with that ID was found"), 400
 
@@ -96,6 +102,7 @@ def update_movie(user_id, movie_id):
 
 @app.route("/users/<user_id>/delete_movie/<int:movie_id>", methods=['GET', 'POST'])
 def delete_movie(user_id, movie_id):
+    """Endpoint to delete the movie of the user's movies"""
     if user_id not in data_manager.get_all_data():
         return render_template("400.html", error_message="No user with that ID was found"), 400
 
