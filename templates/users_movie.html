@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>User {{users_id}}</title>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-    <h1>{{users_id}} Movies!</h1>
+    <h1 class="WebPage-title">{{users_id}} Movies!</h1>
+    <div class="movies_container">
     {% for movie in movies %}
-        <div>
-        <p>{{movie['name']}}</p>
-        <p>{{movie['director']}}</p>
-        <p>{{movie['rating']}}</p>
-        <p>{{movie['year']}}</p>
+        <div class="movies">
+        <p class="movie-p">{{movie['name']}}</p>
+        <p class="movie-p">{{movie['director']}}</p>
+        <p class="movie-p">{{movie['rating']}}</p>
+        <p class="movie-p">{{movie['year']}}</p>
+        <a href="/users/{{users_id}}/delete_movie/{{movie['id']}}">Click here to delete the movie</a>
         </div>
     {% endfor %}
+    </div>
+    <a href="/users/{{users_id}}/add_movie">Click here to add a movie</a>
 </body>
 </html>

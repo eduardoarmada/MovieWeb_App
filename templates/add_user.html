@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>New User!</title>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
 
-    <h1>New user</h1>
-    <form action="/add_user" method="POST">
-        <input type="text" name="name">
-        <input type="submit" value="Send">
+    <h1 class="WebPage-title">New user</h1>
+    <form class="user_form" action="/add_user" method="POST">
+        <input class="form-input" type="text" name="name">
+        <input class="form-input" type="submit" value="Send">
     </form>
 
 </body>

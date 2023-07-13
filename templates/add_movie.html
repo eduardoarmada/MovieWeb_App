@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>New movie!</title>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
 
-    <h1>New Movie</h1>
-    <form action="/users/{{user_id}}/add_movie" method="POST">
+    <h1 class="WebPage-title">New Movie</h1>
+    <form class="movie_form" action="/users/{{user_id}}/add_movie" method="POST">
         <input type="text" name="name">
         <input type="submit" value="Send">
     </form>

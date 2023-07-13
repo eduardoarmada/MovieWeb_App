@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Users - MovieWeb App</title>
-    <link rel="stylesheet" href="" type="text/css">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-    <h1>User's List</h1>
-    <ul>
+    <h1 class="WebPage-title">User's List</h1>
+    <ul class="Users-list">
         {% for user in users.items() %}
-            <li><a href="/users/{{user[0]}}">{{user[1]['name']}}</a></li>
+            <li class="User"><a href="/users/{{user[0]}}">{{user[1]['name']}}</a></li>
         {% endfor %}
     </ul>
 </body>
