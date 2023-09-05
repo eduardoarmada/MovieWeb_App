@@ -1,10 +1,20 @@
 from flask import Flask, jsonify, request, render_template
 from datamanager.json_data_manager import JSONDataManager
 import requests
+import os
+from datamanager.SQLiteDataManager import data_manager as dm, Movie, User
+
 
 API_KEY = "24808d93"
+
 app = Flask(__name__)
-data_manager = JSONDataManager('movies.json')  # Use the appropriate path to your JSON file
+#data_manager = JSONDataManager('movies.json')  # Use the appropriate path to your JSON file
+
+file_path = os.path.abspath(os.getcwd())+"/data/movies.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+file_path
+
+data_manager = dm
+data_manager.create_app(app)
 
 
 def request_info_movie_api(title):
@@ -67,7 +77,7 @@ def add_user():
 @app.route("/users/<user_id>/add_movie", methods=['GET', 'POST'])
 def add_movie(user_id):
     """Endpoint to add a movie to the selected user in the database"""
-    if user_id not in data_manager.get_all_data():
+    if int(user_id) not in data_manager.get_all_data():
         return render_template("400.html", error_message="No user with that ID was found"), 400
 
     if request.method == 'POST':
@@ -85,7 +95,7 @@ def add_movie(user_id):
 @app.route("/users/<user_id>/update_movie/<int:movie_id>", methods=['GET', 'POST'])
 def update_movie(user_id, movie_id):
     """Endpoint to update the selected movie data"""
-    if user_id not in data_manager.get_all_data():
+    if int(user_id) not in data_manager.get_all_data():
         return render_template("400.html", error_message="No user with that ID was found"), 400
 
     if request.method == 'POST':
@@ -103,7 +113,7 @@ def update_movie(user_id, movie_id):
 @app.route("/users/<user_id>/delete_movie/<int:movie_id>", methods=['GET', 'POST'])
 def delete_movie(user_id, movie_id):
     """Endpoint to delete the movie of the user's movies"""
-    if user_id not in data_manager.get_all_data():
+    if int(user_id) not in data_manager.get_all_data():
         return render_template("400.html", error_message="No user with that ID was found"), 400
 
     if request.method == 'POST':
